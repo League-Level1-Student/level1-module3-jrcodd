@@ -1,3 +1,4 @@
+
 /*
  *    Copyright (c) The League of Amazing Programmers 2013-2018
  *    Level 1
@@ -22,16 +23,17 @@ public class SimonSays extends KeyAdapter {
 
 	// Complete steps 1 - 7 before you test
 	// 1. Declare a JFrame variable
-	JFrame f; 
+	JFrame f;
 	HashMap<Integer, String> images = new HashMap<Integer, String>();
 	private int imageIndex;
 	private int tries = 0;
 	private boolean simonSays = false;
-	Date timeAtStart;
+	static Date timeAtStart = new Date();;
+	Integer points = 0;
 
 	private void makeAlbum() {
-		// 2. Add the four images that match keyboard keys like this: 
-		//images.put(new Integer(KeyEvent.VK_UP), "up.jpg");
+		// 2. Add the four images that match keyboard keys like this:
+		// images.put(new Integer(KeyEvent.VK_UP), "up.jpg");
 		images.put(new Integer(KeyEvent.VK_UP), "up.jpg");
 		images.put(new Integer(KeyEvent.VK_RIGHT), "right.jpg");
 		images.put(new Integer(KeyEvent.VK_DOWN), "down.jpg");
@@ -45,77 +47,83 @@ public class SimonSays extends KeyAdapter {
 
 	public void keyPressed(KeyEvent e) {
 		// 15. Make a points variable to track the score.
-Integer points = 0;
+
 		// 16. If the keyCode matches the imageIndex and "Simon says"
-		if(e.getKeyCode() == imageIndex && simonSays == true) {
-		points+= 5;	
-		speak("Correct");
+		if (e.getKeyCode() == imageIndex && simonSays == true) {
+			points += 5;
+			speak("Correct");
 		}
-			// 17. Increase the value of score
-		
-			// 18. Use the speak method to tell the user they were correct
-		
+		// 17. Increase the value of score
+
+		// 18. Use the speak method to tell the user they were correct
+
 		// 19. If the keyCode doesn't match the imageIndex and "Simon didn't say..."
 		else if (e.getKeyCode() != imageIndex && !simonSays) {
-		
-		
-			// 20.  Increase the value of score
-		points += 5;
+
+			// 20. Increase the value of score
+			points += 5;
 			// 21. Use the speak method to tell the user they were correct
-		speak("Correct");}
-		
+			speak("Correct");
+		}
+
 		else {
-			points-=3;
+			points -= 3;
 			speak("incorrect");
 		}
 		// 22. Increment tries by 1
 		tries += 1;
 		// 25. If tries is greater than 9 (or however many you want)...
-		if(tries > 9) {
+		if (tries > 9) {
 			// 26. Tell the user their score
-		speak(points.toString());
+			System.out.println(points);
+			speak(points.toString());
 			// 27. Exit the program
-System.exit(0);
-		// 23. Dispose of the frame
-f.dispose();}
+			Date timeAtEnd = new Date();
+			System.out.println((timeAtEnd.getTime() - timeAtStart.getTime()) / 1000);
+
+			// 23. Dispose of the frame
+			f.dispose();
+			System.exit(0);
+		}
 		// 24. Call the showImage method to show a new image
-showImage();	}
+		showImage();
+
+	}
 
 	private void showImage() {
 		// 5. Initialize your frame to a new JFrame()
 		f = new JFrame();
 		// 6. Set the frame to visible
-f.setVisible(true);
+		f.setVisible(true);
 		// 7. Uncomment the following line to add a random image to your frame
 		f.add(getNextRandomImage());
 
 		// 8. Set the name of your frame
-f.setName("Frame");
+		f.setName("Frame");
 		// 9. Pack the frame
 		f.pack();
 		// 10. Set the defaultCloseOperation of your from to JFrame.EXIT_ON_CLOSE
 		f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
 		// 11. Add a key listener to the frame
-f.addKeyListener(this);
+		f.addKeyListener(this);
 		// 12. Create a new instance of Random
-Random r = new Random();
-int num = r.nextInt(2);
-		// 13. Use the Random and the speak method to either say 
+		Random r = new Random();
+		int num = r.nextInt(2);
+		// 13. Use the Random and the speak method to either say
 		// "Simon says press this key" or "Press this key"
-if(num == 0) {
-	speak("Simon Says Press this key");
-}
-else if(num == 1) {
-	speak("Press this key");
-}
+		if (num == 0) {
+			speak("Simon Says Press this key");
+		} else if (num == 1) {
+			speak("Press this key");
+		}
 		// 14. Above, set the value of simonSays to true/false appropriately
-if(num == 0) {
-simonSays = true;	
-}
-if(num == 1) {
-simonSays = false;	
-}
-		
+		if (num == 0) {
+			simonSays = true;
+		}
+		if (num == 1) {
+			simonSays = false;
+		}
+
 	}
 
 	private Component getNextRandomImage() {
@@ -143,13 +151,10 @@ simonSays = false;
 }
 
 /*
- * BONUS!
- * Add a timer :
- * ~~~ where the code starts running ~~~ 
- * timeAtStart = newDate();
+ * BONUS! Add a timer : ~~~ where the code starts running ~~~ timeAtStart = new
+ * Date();
  *
- * ~~~ where the code ends ~~~ 
- * Date timeAtEnd = new Date();
+ * ~~~ where the code ends ~~~ Date timeAtEnd = new Date();
  * System.out.println((timeAtEnd.getTime()-timeAtStart.getTime())/1000);
  * System.exit(0);
  */
