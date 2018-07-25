@@ -7,6 +7,7 @@
 
 public class Movie implements Comparable<Movie> {
 
+
 	private String title;
 	private int stars;
 
@@ -36,6 +37,7 @@ public String getTicketPrice() {
 			return "Don't waste your money on this horrible rubbish.";
 		}
 	}
+
  
 
 	public int compareTo(Movie otherMovie) {
